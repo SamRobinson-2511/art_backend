@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
     rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-    rescue_from ActiveRecord::RecordInvalid, with :render_unprocessable_entity
+    rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
 
     def current_viewer
         auth_token = request.headers['auth-token']
@@ -20,7 +20,8 @@ class ApplicationController < ActionController::API
     end
 
     def fetch_art
-        params = "title,artist_display,main_reference_number,date_start,date_end,date_display,place_of_origin,dimensions,medium_display,inscriptions,credit_line,publication_history,is_on_view,gallery_title,image_id"
+        params = 'title'
+        # params = "title,artist_display,main_reference_number,date_start,date_end,date_display,place_of_origin,dimensions,medium_display,inscriptions,credit_line,publication_history,is_on_view,gallery_title,image_id"
         response = JSON.parse(RestClient.get("https://api.artic.edu/api/v1/artworks?fields=#{params}&limit=10"))
         render json: response, status: :ok
     end
