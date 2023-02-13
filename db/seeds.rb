@@ -48,7 +48,7 @@ w3 = Wishlist.create!(viewer: Viewer.third, art: Art.third)
 puts 'seeded wishlist'
 
 puts 'seed gallery'
-g1 = Gallery.create!(name: 'Modern')
-g2 = Gallery.create!(name: 'Ancient')
-g3 = Gallery.create!(name: 'Postwar')
+g1 = Gallery.create!(name: 'Modern', viewer_id: v1.id)
+g2 = Gallery.create!(name: 'Ancient', viewer_id: v2.id)
+g3 = Gallery.create!(name: 'Postwar', viewer_id: v3.id)
 puts 'gallery seeded'

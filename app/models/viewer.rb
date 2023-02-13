@@ -11,12 +11,8 @@ class Viewer < ApplicationRecord
     (?=.*[[:^alnum:]]) #contains at least one symbol
     /x
   validates :password_digest, presence: true, format: PASSWORD_REQUIREMENTS
+  validates :zip_code, presence: true
   has_many :visits
   has_many :reviews, through: :visits
-
-  has_many :visits
-  has_many :galleries, through: :visits
-
-  has_many :visits
-  has_many :wishlists, through: :visits
+  has_many :galleries
 end
