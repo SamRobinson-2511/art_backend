@@ -28,9 +28,9 @@ class ApplicationController < ActionController::API
     end
     
     def search
-        url = "https://api.artic.edu/api/v1/artworks/search?q=#{params[:searchTerm]}"
-        response = JSON.parse( RestClient.get("https://api.artic.edu/api/"))
-        render json: response, status: :ok
+        response = JSON.parse( RestClient.get("https://api.artic.edu/api/v1/artworks/search?q=#{params[:search]}"))
+        data = response['data']
+        render json: data, status: :ok
     end
 
     def gallery

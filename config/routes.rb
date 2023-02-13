@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   post '/register', to: 'sessions#create', as: 'register'
 
   get '/fetch', to: 'application#fetch'
-  get '/search', to: 'application#search'
+  post '/search', to: 'application#search'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
