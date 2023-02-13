@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :wishlists
+  resources :galleries
+  resources :reviews
   resources :arts
   resources :visits
   resources :viewers
