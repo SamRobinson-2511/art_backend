@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_13_212848) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_13_225924) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,6 +24,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_212848) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "viewer_id"
+    t.index ["viewer_id"], name: "index_galleries_on_viewer_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -56,6 +58,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_13_212848) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "review_id"
+    t.index ["review_id"], name: "index_visits_on_review_id"
+    t.index ["viewer_id"], name: "index_visits_on_viewer_id"
   end
 
   create_table "wishlists", force: :cascade do |t|
