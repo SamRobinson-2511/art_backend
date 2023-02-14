@@ -12,9 +12,12 @@ class Viewer < ApplicationRecord # rubocop:disable Style/FrozenStringLiteralComm
     /x
   validates :password_digest, presence: true, on: create, format: PASSWORD_REQUIREMENTS
   validates :zip_code, presence: true, on: create
+  
   has_many :visits
   has_many :reviews, through: :visits
+  
   has_many :galleries
+  
   has_many :wishlists
   has_many :arts, through: :wishlists
 

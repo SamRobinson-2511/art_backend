@@ -10,6 +10,8 @@ Rails.application.routes.draw do # rubocop:disable Style/FrozenStringLiteralComm
   post '/register', to: 'viewers#create', as: 'register'
   get '/fetch', to: 'application#fetch'
   post '/search', to: 'application#search'
+
+  get '/my_reviews', to: 'users#get-reviews'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
