@@ -1,14 +1,13 @@
-Rails.application.routes.draw do
+Rails.application.routes.draw do # rubocop:disable Style/FrozenStringLiteralComment
   resources :wishlists
   resources :galleries
   resources :reviews
   resources :arts
   resources :visits
-  resources :viewers
+  resources :viewers, only: %i[show create index]
 
   post '/login', to: 'sessions#create', as: 'login'
-  post '/register', to: 'sessions#create', as: 'register'
-
+  post '/register', to: 'viewers#create', as: 'register'
   get '/fetch', to: 'application#fetch'
   post '/search', to: 'application#search'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
