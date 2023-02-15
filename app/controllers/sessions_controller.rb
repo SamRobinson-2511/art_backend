@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
 
     def create 
         @viewer = Viewer.find_by(email: params[:email])    
-        if @viewer and @viewer.authenticate( params[:password_digest] )
+        if @viewer and @viewer.authenticate( params[:password] )
             logged_viewer = JWT.encode( {viewer: @viewer.id}, ENV['JWT_TOKEN'])
             render json: { uid: logged_viewer }, status: :ok
         else

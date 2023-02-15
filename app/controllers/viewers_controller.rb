@@ -1,38 +1,45 @@
 class ViewersController < ApplicationController
 
-    before_action :authorize!, only: [:update]
-    def index
-        render json: Viewer.all
-    end
+    skip_before_action :authorized, only: [:create]
 
-    def show
-        render json: Viewer.find(params[:id])
+    def profile
+        render json: {viewer: current_viewer}
     end
 
     def create
-        viewer = Viewer.create!(user_params)
-        if user.valid?
-            render json: { token: issue_token({ viewer_id: viewer.id }), viewer: ViewerSerializer.new(viewer)}
+        viewer = Viewer.create!(viewer_params)
+        if !viewer.valid?
+            render json: {error: "400", msg: "Error creating viewer"}
         else
-            render json: { errors: viewer.errors.full_messages }, status: :not_acceptable
+            render json: {viewer: viewer, jwt: encode_token(viewer_id: viewer.id)}
         end
     end
-
-    def update
-        viewer = Viewer.find(params[:id])
-        viewer.update(viewer_params)
-        render json: viewer, status: :updated
+        
+    def show
+        viewer = Viewer.find_by(id: params[:id])
+        render json: viewer
     end
 
-    def destroy
-        user = User.find(params[:id])
-        user.destroy
+    def update 
+        viewer = Viewer.find_by(id: params[:id])
+        viewer.update(user_params)
+        render json: viewer
+    end
+
+    def delete 
+        viewer = Viewer.find_by(id: params[:id])
+        viewer.delete
+        render json: viewer
     end
 
     private
 
-    def user_params
-        params.require(:viewer).permit(:first_name, :last_name, :email, :password, :zip_code)
+    def viewer_params
+        params.require(:viewer).permit(:first_name, :last_name, :password, :password_confirmation, :email, :zip_code)
     end
 end
+
+
+    
+
 
