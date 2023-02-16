@@ -5,7 +5,7 @@ class ReviewsController < ApplicationController
         review = Review.create!(review_params)
         review.viewer_id = current_viewer.id
         
-        rendeer json: review, status: :created
+        render json: review, status: :created
     end
     
     def show
@@ -20,6 +20,7 @@ class ReviewsController < ApplicationController
         review = Review.update!(review_params)
         render json: review, status: :updated
     end
+
     def destroy
     end
 

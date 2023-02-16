@@ -1,23 +1,39 @@
 Rails.application.routes.draw do # rubocop:disable Style/FrozenStringLiteralComment
-  resources :wishlists
-  resources :galleries
-  resources :reviews
-  resources :arts
-  resources :visits
-  resources :viewers
+  # resources :wishlists
+  # resources :galleries
+  # resources :reviews
+  # resources :arts
+  # resources :visits
+  # resources :viewers
   
   
-  #viewers routes
-  get '/viewers/:id', to: 'viewers#show'
-  post '/viewers/', to: 'viewers#create'
-  patch '/viewers/:id', to: 'viewers#update'
+  
+  get '/authorized/:id', to: 'viewers#show'
+  get '/all_galleries', to: 'galleries#index'
+  get '/galleries/:id', to: 'galleries#show'
+  get '/all_visits', to: 'visits#index'
+  get '/viewers/:id/visit', to: 'visits#show'
+  get '/arts', to: 'index#arts'
+  get '/all_reviews', to: 'index#reviews'
+  post '/signup', to: 'viewers#create'
+  # post '/login', to: 'sessions#create'
+  # post '/login', to: 'auth#login'
+  post '/viewers/:id/add_visit', to: 'visits#create'
+  post '/add_gallery', to: 'galleries#create'
+  post '/add_review', to: 'reviews#create'
+  patch '/viewers/:id/profile/edit', to: 'viewers#update'
+  patch '/reviews/:id/edit', to: 'reviews#update'
+  patch '/visits/:id/edit', to: 'visits#update'
+  delete '/visits/:id/delete', to: 'visits#delete'
+  
+
   delete 'viewers/:id', to: 'viewers#destroy'
+  delete 'logout', to: 'sessions#destroy'
   
-  #auth routes
   post '/login', to: 'auth#login'
   get '/profile', to: 'viewers#profile'
   
-  post '/register', to: 'viewers#create', as: 'register'
+  # post '/register', to: 'viewers#create', as: 'register'
   
   
 
@@ -41,7 +57,7 @@ Rails.application.routes.draw do # rubocop:disable Style/FrozenStringLiteralComm
 
   # post '/new', to: 'visits#create', as: 'new'
 
-  # get '/explore', to: 'arts#explore'
+  get '/explore', to: 'arts#explore'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
