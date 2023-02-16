@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
 
+    skip_before_action :authorized, only:[:create]
+
     def create 
         @viewer = Viewer.find_by(email: params[:email])    
         if @viewer and @viewer.authenticate( params[:password] )
