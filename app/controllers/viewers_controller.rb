@@ -35,7 +35,7 @@ class ViewersController < ApplicationController
     private
 
     def viewer_params
-        params.permit(:first_name, :last_name, :password, :password_confirmation, :email, :zip_code)
+        params.permit(:first_name, :last_name, :password, :email, :zip_code)
     end
 end
 
