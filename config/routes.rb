@@ -25,13 +25,13 @@ Rails.application.routes.draw do # rubocop:disable Style/FrozenStringLiteralComm
   patch '/reviews/:id/edit', to: 'reviews#update'
   patch '/visits/:id/edit', to: 'visits#update'
   delete '/visits/:id/delete', to: 'visits#delete'
-  
-
   delete 'viewers/:id', to: 'viewers#destroy'
   delete 'logout', to: 'sessions#destroy'
   
   post '/login', to: 'auth#login'
   get '/profile', to: 'viewers#profile'
+
+  get '/fetch_art', to: 'arts#index'
   
   # post '/register', to: 'viewers#create', as: 'register'
   

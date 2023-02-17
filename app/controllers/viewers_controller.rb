@@ -1,9 +1,10 @@
 class ViewersController < ApplicationController
-
     skip_before_action :authorized, only: [:create, :show, :update]
 
     def profile
         render json: {viewer: current_viewer}
+    end
+    
     end
 
     def create

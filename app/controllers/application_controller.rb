@@ -38,32 +38,11 @@ class ApplicationController < ActionController::API
         render json: {msg: ['Please login']}, status: :unauthorized unless logged_in?
     end
 
-
-    def fetch
-        params = "id,title,artist_display,is_on_view,image_id"
-        # params = "title,artist_display,main_reference_number,date_start,date_end,date_display,place_of_origin,dimensions,medium_display,inscriptions,credit_line,publication_history,is_on_view,gallery_title,image_id"
-        response = JSON.parse(RestClient.get("https://api.artic.edu/api/v1/artworks?fields=#{params}&limit=20"))
-        data = response['data']
-        render json: data, status: :ok
-    end
-    
-    def search
-        response = JSON.parse(RestClient.get("https://api.artic.edu/api/v1/artworks/search?q=#{params[:search]}"))
-        data = response['data']
-        render json: data, status: :ok
-    end
-
-    def gallery
-        gallery = "title,artist_display,main_reference_number,date_start,date_end,date_display"
-        url = "https://api.artic.edu/api/v1/artworks/artworks?fields=#{gallery}&limit=10"
-        response = JSON.parse(RestClient.get("https://api.artic.edu/api/"))
-        render json: response, status: :ok
-    end
-
     private
     def self.secret
         "f0r_a11_7h3_m0n37_7h27_3R_7_h@d"
     end
+    
     def render_unprocessable_entity(invalid)
         render json: {errors: invalid.record.errors}, status: :unprocessable_entity
     end 
